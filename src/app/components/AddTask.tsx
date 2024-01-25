@@ -2,16 +2,25 @@
 import React, { FormEventHandler, useState } from 'react'
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Modal from './Modal';
-
+import { addTodo } from '@/apis/api';
+import { useRouter } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function AddTask() {
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [newTaskValue,setNewTaskValue] = useState<string>("");
 
-  const handleSubmitNewTodo:FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmitNewTodo:FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log(newTaskValue)
+    await addTodo({
+      id:uuidv4(),
+      text:newTaskValue,
+    })
     setNewTaskValue("");
+    setModalOpen(false);
+    router.refresh()
+
 
   }
 

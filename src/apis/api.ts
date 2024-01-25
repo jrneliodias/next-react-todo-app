@@ -3,13 +3,13 @@ import { ITask } from "../../types/tasks";
 const baseUrl = "http://localhost:3001";
 
 export const getALlTodos = async (): Promise<ITask[]> => {
-  const res = await fetch(`${baseUrl}/tasks`);
+  const res = await fetch(`${baseUrl}/tasks`,{cache:'no-store'});
   const todos = await res.json();
   return todos;
 };
 
 export const addTodo = async (todo: ITask):Promise<ITask> => {
-  const res = await fetch(`{baseUrl}/tasks`, {
+  const res = await fetch(`${baseUrl}/tasks`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
