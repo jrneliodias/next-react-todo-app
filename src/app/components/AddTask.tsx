@@ -25,10 +25,10 @@ export default function AddTask() {
   }
 
   return (
-    <div className='flex content-center'>
+    <div className='flex'>
       <button
         onClick={() => setModalOpen(true)}
-        className='btn btn-primary w-full text-md py-2'>
+        className='btn btn-primary w-5/6 text-md py-2 mx-auto'>
         <span >
           ADD NEW TASK
         </span>
