@@ -10,6 +10,7 @@
     "json-server": "json-server --watch data/todos.json --port 3001"
   },
   "dependencies": {
+    "@prisma/client": "^5.8.1",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
