@@ -6,7 +6,7 @@ interface TodoListProps {
   tasks: ITask[]
 }
 
-export default function TodoList({tasks}:TodoListProps) {
+export default function TodoList({ tasks }: TodoListProps) {
   return (
     <div className='content-center'>
       <div className="overflow-x-auto">
@@ -15,19 +15,17 @@ export default function TodoList({tasks}:TodoListProps) {
           <thead>
             <tr>
 
-              <th>Taks</th>
-              <th>Actions</th>
+              <th className=''>Tasks</th>
+              <th className='text-center'>Actions</th>
 
             </tr>
           </thead>
           <tbody>
             {tasks.map((task) => (
-                <Task key = {task.id} task= {task}/>
+              <Task key={task.id} task={task} />
 
-            )
+            ))}
 
-            )}
-            {/* row 1 */}
 
           </tbody>
         </table>
