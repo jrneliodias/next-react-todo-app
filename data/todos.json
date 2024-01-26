@@ -1,16 +1,8 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "text": "Call to my girfriend"
-    },
-    {
-      "id": "c53ff898-e647-4b44-99b1-64722193c62b",
-      "text": "find my book"
-    },
-    {
-      "id": "e21e4773-bbbb-4380-8efc-ea0ec5cf98dc",
-      "text": "Make the lunch"
+      "id": "e1707076-cc80-4e0f-b00f-ac2e1d2cf8e1",
+      "text": "write a prisma database"
     }
   ]
 }
