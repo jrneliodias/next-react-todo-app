@@ -1,18 +1,35 @@
 'use client'
-import React, { useState } from 'react'
+import React, { FormEventHandler, useState } from 'react'
 import { ITask } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
+import { useRouter } from 'next/navigation'
+import { editTodo } from '@/apis/api'
 
 interface TaskProps {
     task: ITask
 }
 
 function Task({ task }: TaskProps) {
+    const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openModalDeleted, setModalDeleted] = useState<boolean>(false);
     const [taskToEdit, setTaskToEdit] = useState<string>(task.text)
-    const handleSubmitEditTodo = () => { }
+   
+    
+    const handleSubmitEditTodo:FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        await editTodo({
+          id:task.id,
+          text:taskToEdit,
+        })
+        setTaskToEdit("");
+        setOpenModalEdit(false);
+        router.refresh()
+    
+    
+      }
+    
     return (
         <tr key={task.id} className="hover ">
             <td className='w-full'>{task.text}</td>
