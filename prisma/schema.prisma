@@ -1,0 +1,18 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model task {
+  id Int @id @default(autoincrement())
+  content String @db.VarChar(200)
+  favorite Boolean @default(false)
+  color String @db.VarChar(10) @default("#0000")
+  }
