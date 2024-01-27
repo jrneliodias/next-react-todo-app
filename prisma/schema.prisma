@@ -11,8 +11,8 @@ datasource db {
 }
 
 model task {
-  id Int @id @default(autoincrement())
-  content String @db.VarChar(200)
+  id       Int     @id @default(autoincrement())
+  content  String  @db.VarChar(200)
   favorite Boolean @default(false)
-  color String @db.VarChar(10) @default("#0000")
-  }
+  color    String  @default("#0000") @db.VarChar(10)
+}
