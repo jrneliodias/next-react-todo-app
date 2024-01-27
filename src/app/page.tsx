@@ -8,7 +8,7 @@ export default async function Home() {
 
 
   return (
-    <main className="max-w-4xl m-5">
+    <main className="max-w-4xl my-5 mx-auto">
       <div className="flex w-full flex-col gap-3 justify-center">
       <h1 className="text-center text-3xl justify-center font-bold">TO DO LIST</h1>
       <AddTask/>
