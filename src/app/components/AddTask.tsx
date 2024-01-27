@@ -2,7 +2,7 @@
 import React, { FormEventHandler, useState } from 'react'
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Modal from './Modal';
-import { addTodo } from '@/apis/api';
+import { addTodo } from '@/app/apis/api';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 

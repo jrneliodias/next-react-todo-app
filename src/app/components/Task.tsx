@@ -4,7 +4,7 @@ import { ITask } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
-import { deleteTodo, editTodo } from '@/apis/api'
+import { deleteTodo, editTodo } from '@/app/apis/api'
 
 interface TaskProps {
     task: ITask
