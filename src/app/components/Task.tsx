@@ -14,14 +14,16 @@ function Task({ task }: TaskProps) {
     const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
-    const [taskToEdit, setTaskToEdit] = useState<string>(task.text)
+    const [checkCheckbox, setCheckbox] = useState<boolean>(false);
+    const [taskToEdit, setTaskToEdit] = useState<string>(task.content)
 
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await editTodo({
             id: task.id,
-            text: taskToEdit,
+            favorite: false,
+            content: taskToEdit,
         })
      
         setOpenModalEdit(false);
@@ -38,7 +40,13 @@ function Task({ task }: TaskProps) {
 
     return (
         <tr key={task.id} className="hover ">
-            <td className='w-full'>{task.text}</td>
+            <td >
+            <input type="checkbox" 
+            onClick={() => setCheckbox(!checkCheckbox)} 
+            checked={checkCheckbox} className="checkbox checkbox-primary" />
+            </td>
+            <td className=''>Color</td>
+            <td className='w-full'>{task.content}</td>
             <td className='flex gap-5'>
                 <FiEdit
                     onClick={() => setOpenModalEdit(true)}

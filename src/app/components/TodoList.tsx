@@ -15,6 +15,8 @@ export default function TodoList({ tasks }: TodoListProps) {
           <thead>
             <tr>
 
+              <th className=''>Favorite</th>
+              <th className=''>Color</th>
               <th className=''>Tasks</th>
               <th className='text-center'>Actions</th>
 

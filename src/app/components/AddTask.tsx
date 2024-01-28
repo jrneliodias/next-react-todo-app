@@ -15,7 +15,8 @@ export default function AddTask() {
     e.preventDefault();
     await addTodo({
       id:uuidv4(),
-      text:newTaskValue,
+      favorite:false,
+      content:newTaskValue,
     })
     setNewTaskValue("");
     setModalOpen(false);
