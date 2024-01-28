@@ -1,5 +1,5 @@
 'use client'
-import React, { FormEventHandler, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import { ITask } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
@@ -25,56 +25,74 @@ function Task({ task }: TaskProps) {
             favorite: false,
             content: taskToEdit,
         })
-     
+
         setOpenModalEdit(false);
         router.refresh()
 
 
     }
 
-    const handleSubmitDeleteTask = async (id: string)  => {
+    const handleSubmitDeleteTask = async (id: string) => {
         await deleteTodo(id);
         setDeleteModal(false)
         router.refresh()
     }
 
-    return (
-        <tr key={task.id} className="hover ">
-            <td >
-            <input type="checkbox" 
-            onClick={() => setCheckbox(!checkCheckbox)} 
-            checked={checkCheckbox} className="checkbox checkbox-primary" />
-            </td>
-            <td className=''>Color</td>
-            <td className='w-full'>{task.content}</td>
-            <td className='flex gap-5'>
-                <FiEdit
-                    onClick={() => setOpenModalEdit(true)}
-                    cursor='pointer' size={20} />
-                <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
-                    <form onSubmit={handleSubmitEditTodo}>
-                        <h3 className="font-bold text-lg">Edit the task</h3>
-                        <div className="modal-action">
-                            <input type="text" placeholder="Type here"
-                                value={taskToEdit}
-                                onChange={e => setTaskToEdit(e.target.value)}
-                                className="input input-bordered w-full " />
-                            <button type='submit' className='btn'>Submit</button>
-                        </div>
-                    </form>
-                </Modal>
-                <FiTrash onClick={ () => setDeleteModal(true)} cursor='pointer' size={20} className='text-red-500' />
-                <Modal modalOpen={openDeleteModal} setModalOpen={setDeleteModal}>
-                    <form onSubmit={handleSubmitEditTodo}>
-                        <h3 className="font-bold text-lg">Are you sure to delete?</h3>
-                        <div className="modal-action">
-                            <button onClick={() => handleSubmitDeleteTask(task.id)} type='submit' className='btn'>Delete</button>
-                        </div>
-                    </form>
-                </Modal>
-            </td>
-        </tr>
-    )
-}
 
-export default Task
+    const handleChangeFavoriteValue = async (e:ChangeEvent<HTMLInputElement>) => {
+        const newValue  = e.target.checked
+        setCheckbox(newValue)
+
+        await editTodo({
+            id: task.id,
+            favorite:newValue,
+            content: taskToEdit,
+        })
+        router.refresh()
+    }
+
+    return(
+    
+            <tr key={task.id} className="hover ">
+                <td >
+                    <input
+                        type="checkbox"
+                        // onClick={() => setCheckbox(!checkCheckbox)}
+                        onChange={handleChangeFavoriteValue}
+                        defaultChecked={checkCheckbox}
+                        className="checkbox checkbox-primary" />
+                </td>
+                <td className=''>Color</td>
+                <td className='w-full'>{task.content}</td>
+
+                <td className='flex gap-5'>
+                    <FiEdit
+                        onClick={() => setOpenModalEdit(true)}
+                        cursor='pointer' size={20} />
+                    <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
+                        <form onSubmit={handleSubmitEditTodo}>
+                            <h3 className="font-bold text-lg">Edit the task</h3>
+                            <div className="modal-action">
+                                <input type="text" placeholder="Type here"
+                                    value={taskToEdit}
+                                    onChange={e => setTaskToEdit(e.target.value)}
+                                    className="input input-bordered w-full " />
+                                <button type='submit' className='btn'>Submit</button>
+                            </div>
+                        </form>
+                    </Modal>
+                    <FiTrash onClick={() => setDeleteModal(true)} cursor='pointer' size={20} className='text-red-500' />
+                    <Modal modalOpen={openDeleteModal} setModalOpen={setDeleteModal}>
+                        <form onSubmit={handleSubmitEditTodo}>
+                            <h3 className="font-bold text-lg">Are you sure to delete?</h3>
+                            <div className="modal-action">
+                                <button onClick={() => handleSubmitDeleteTask(task.id)} type='submit' className='btn'>Delete</button>
+                            </div>
+                        </form>
+                    </Modal>
+                </td>
+            </tr>
+        )
+    }
+
+    export default Task
