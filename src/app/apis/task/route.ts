@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/db";
 
-export async function GET(req: NextRequest) {
-  // console.log(req.nextUrl.searchParams)
+export async function GET(req:NextRequest) {
   try {
     const task = await prisma.task.findMany();
 
-    return Response.json({ message: "OK", task });
+    return Response.json({task });
   } catch (error) {
     return NextResponse.json(
       {
@@ -19,11 +18,12 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: Request) {
-  const { content, favorite, color } = await req.json();
+  const {id, content, favorite, color } = await req.json();
 
   try {
     const task = await prisma.task.create({
       data: {
+        id,
         content,
         favorite,
         color,
