@@ -8,7 +8,7 @@ interface TodoListProps {
 
 export default function TodoList({ tasks }: TodoListProps) {
   return (
-    <div className='content-center'>
+    <div className='content-center mx-5'>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
