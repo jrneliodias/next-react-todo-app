@@ -1,4 +1,9 @@
 export interface ITask {
     id: string,
-    text: string
+    content: string,
+    favorite:boolean,
+    color?: string
+}
+export interface TaskObject {
+    task:ITask[]
 }
