@@ -22,7 +22,7 @@ function Task({ task }: TaskProps) {
     const [isFavorite, setFavorite] = useState<boolean>(task.favorite);
     const [taskToEdit, setTaskToEdit] = useState<string>(task.content);
     const [color, setColor] = useState<Color>(task.color);
- 
+
 
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -55,12 +55,12 @@ function Task({ task }: TaskProps) {
             id: task.id,
             favorite: favoriteChange,
             content: taskToEdit,
-            color:String(color)
+            color: String(color)
         })
         router.refresh()
     }
 
-    const handleChangeColorValue = async (colorValue:string) => {
+    const handleChangeColorValue = async (colorValue: string) => {
         const newColor = colorValue
         setColor(newColor)
 
@@ -90,7 +90,9 @@ function Task({ task }: TaskProps) {
                     <FaStar className="swap-on fill-current text-yellow-500" size={20} />
                 </label>
             </td>
-            <td className=''><ColorPicker value={color} onChangeComplete={(value)  => handleChangeColorValue(value.toHex())}/>
+            <td className=''><ColorPicker value={color}
+                size="small"
+                onChangeComplete={(value) => handleChangeColorValue(value.toHex())} />
             </td>
             <td className='w-full'>{task.content}</td>
 
