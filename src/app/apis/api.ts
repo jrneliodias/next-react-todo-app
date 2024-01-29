@@ -1,4 +1,4 @@
-import { ITask, TaskObject } from "../../../types/tasks";
+import { ITask, ITaskColor, TaskObject } from "../../../types/tasks";
 
 const baseUrl = "http://localhost:3000/apis";
 
@@ -8,7 +8,7 @@ export const getAllTodos = async (): Promise<TaskObject> => {
   return todos;
 };
 
-export const addTodo = async (todo: ITask):Promise<ITask> => {
+export const addTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
   const res = await fetch(`${baseUrl}/task`, {
     method: "POST",
     headers: {
@@ -20,7 +20,7 @@ export const addTodo = async (todo: ITask):Promise<ITask> => {
   return newTodo;
 };
 
-export const editTodo = async (todo: ITask):Promise<ITask> => {
+export const editTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
   const res = await fetch(`${baseUrl}/task`, {
     method: "PUT",
     headers: {
