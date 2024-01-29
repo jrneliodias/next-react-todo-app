@@ -67,7 +67,7 @@ function Task({ task }: TaskProps) {
                     <FaStar className="swap-on fill-current text-yellow-500" size={20} />
                 </label>
             </td>
-            <td className=''>Color</td>
+            <td className=''>{task.color}</td>
             <td className='w-full'>{task.content}</td>
 
             <td className='flex gap-5'>

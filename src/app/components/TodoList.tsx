@@ -18,8 +18,8 @@ const sortedTasks = [...tasks].sort((a,b)=> (a.favorite === b.favorite? 0: a.fav
           <thead>
             <tr>
 
-              <th className=''>Favorite</th>
-              <th className=''>Color</th>
+              <th className=''></th>
+              <th className=''></th>
               <th className=''>Tasks</th>
               <th className='text-center'>Actions</th>
 
