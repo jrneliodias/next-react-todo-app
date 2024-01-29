@@ -1,9 +1,9 @@
 import React from 'react'
-import { ITask } from '../../../types/tasks'
+import { ITask, ITaskColor } from '../../../types/tasks'
 import Task from './Task'
 
 interface TodoListProps {
-  tasks: ITask[]
+  tasks: ITaskColor[]
 }
 
 export default function TodoList({ tasks }: TodoListProps) {
