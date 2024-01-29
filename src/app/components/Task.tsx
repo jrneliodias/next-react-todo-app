@@ -1,22 +1,28 @@
 'use client'
 import React, { ChangeEvent, FormEventHandler, useState } from 'react'
-import { ITask } from '../../../types/tasks'
+import { ITask, ITaskColor } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import { deleteTodo, editTodo } from '@/app/apis/api'
 import { FaRegStar, FaStar } from 'react-icons/fa'
+import { ColorPicker } from 'antd'
+import type { ColorPickerProps, GetProp } from 'antd';
 
+
+type Color = GetProp<ColorPickerProps, 'value'>;
 interface TaskProps {
-    task: ITask
+    task: ITaskColor
 }
 
 function Task({ task }: TaskProps) {
     const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
-    const [checkCheckbox, setCheckbox] = useState<boolean>(false);
-    const [taskToEdit, setTaskToEdit] = useState<string>(task.content)
+    const [isFavorite, setFavorite] = useState<boolean>(task.favorite);
+    const [taskToEdit, setTaskToEdit] = useState<string>(task.content);
+    const [color, setColor] = useState<Color>(task.color);
+ 
 
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -25,6 +31,7 @@ function Task({ task }: TaskProps) {
             id: task.id,
             favorite: false,
             content: taskToEdit,
+            color: String(color)
         })
 
         setOpenModalEdit(false);
@@ -41,33 +48,50 @@ function Task({ task }: TaskProps) {
 
 
     const handleChangeFavoriteValue = async (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.checked
-        setCheckbox(newValue)
+        const favoriteChange = e.target.checked
+        setFavorite(favoriteChange)
 
         await editTodo({
             id: task.id,
-            favorite: newValue,
+            favorite: favoriteChange,
             content: taskToEdit,
+            color:String(color)
         })
         router.refresh()
     }
 
+    const handleChangeColorValue = async (colorValue:string) => {
+        const newColor = colorValue
+        setColor(newColor)
+
+        await editTodo({
+            id: task.id,
+            favorite: isFavorite,
+            content: taskToEdit,
+            color: newColor
+        })
+        router.refresh()
+    }
+
+
+
     return (
 
-        <tr key={task.id} className="hover ">
-            <td >
-                             
+        <tr key={task.id} className={`hover`}>
+            <td>
+
                 <label className="swap swap-flip">
                     {/* this hidden checkbox controls the state */}
-                    <input type="checkbox" 
-                    onChange={handleChangeFavoriteValue}
-                    defaultChecked={checkCheckbox}/>
+                    <input type="checkbox"
+                        onChange={handleChangeFavoriteValue}
+                        defaultChecked={isFavorite} />
 
-                    <FaRegStar className="swap-off fill-current"  size={20} />
+                    <FaRegStar className="swap-off fill-current" size={20} />
                     <FaStar className="swap-on fill-current text-yellow-500" size={20} />
                 </label>
             </td>
-            <td className=''>{task.color}</td>
+            <td className=''><ColorPicker value={color} onChangeComplete={(value)  => handleChangeColorValue(value.toHex())}/>
+            </td>
             <td className='w-full'>{task.content}</td>
 
             <td className='flex gap-5'>
