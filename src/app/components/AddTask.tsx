@@ -17,6 +17,7 @@ export default function AddTask() {
       id:uuidv4(),
       favorite:false,
       content:newTaskValue,
+      color: '1d232a'
     })
     setNewTaskValue("");
     setModalOpen(false);
