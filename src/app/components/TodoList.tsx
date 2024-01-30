@@ -17,19 +17,20 @@ export default function TodoList({ tasks }: TodoListProps) {
   const handleChangeFavoriteFilterValue = (e: ChangeEvent<HTMLInputElement>) => {
     const filterFavorite = e.target.checked
     setFilterFavorite(filterFavorite)
-    
-}
 
-const filteredTodos = filterFavorite ? sortedTasks.filter((todo)=> todo.favorite) : sortedTasks
+  }
+
+  const filteredTodos = filterFavorite ? sortedTasks.filter((todo) => todo.favorite) : sortedTasks
 
   return (
     <div className='content-center mx-5'>
       <div className="form-control">
         <label className=" flex gap-2 items-center cursor-pointer">
-          <input type="checkbox" onChange={handleChangeFavoriteFilterValue} defaultChecked={filterFavorite} className="checkbox checkbox-secondary" />
-          <span className="label-text "> Favoritos </span>
+          <input type="checkbox" onChange={handleChangeFavoriteFilterValue} defaultChecked={filterFavorite} aria-label='Favoritos' className="btn" />
+         
         </label>
       </div>
+      
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

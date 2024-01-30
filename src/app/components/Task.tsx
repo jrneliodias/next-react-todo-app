@@ -90,9 +90,11 @@ function Task({ task }: TaskProps) {
                     <FaStar className="swap-on fill-current text-yellow-500" size={20} />
                 </label>
             </td>
-            <td className=''><ColorPicker value={color}
-                size="small"
-                onChangeComplete={(value) => handleChangeColorValue(value.toHex())} />
+            <td className=''>
+                <ColorPicker value={color}
+                    size="small"
+                    onChangeComplete={(value) => handleChangeColorValue(value.toHex())} />
+               
             </td>
             <td className='w-full'>{task.content}</td>
 
