@@ -14,5 +14,5 @@ model task {
   id       String  @id @default(uuid())
   content  String  @db.VarChar(200)
   favorite Boolean @default(false)
-  color    String  @default("#0000") @db.VarChar(10)
+  color    String  @default("#0000") @db.VarChar(15)
 }
