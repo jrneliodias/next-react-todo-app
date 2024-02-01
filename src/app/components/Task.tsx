@@ -57,23 +57,6 @@ export default function Task({ task }: TaskProps) {
         router.refresh()
     }
 
-<<<<<<< HEAD
-=======
-    const handleChangeColorValue = async (colorValue: string) => {
-        const newColor = colorValue
-        if (newColor !== task.color) {
-            setSelectedColor(newColor);
-
-            await editTodo({
-                id: task.id,
-                favorite: isFavorite,
-                content: taskToEdit,
-                color: newColor
-            })
-            router.refresh()
-        }
-    }
->>>>>>> 140a4bdeba6c1e090cc4a11bed15348d65bad0bc
 
 
     return (
