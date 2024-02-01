@@ -95,7 +95,7 @@ export default function TodoList({ tasks }: TodoListProps) {
 
         <div className="form-control">
           <label className="label cursor-pointer gap-2">
-            <input type="checkbox" className="checkbox checkbox-primary" defaultChecked={filterFavorite} />
+            <input type="checkbox" className="checkbox checkbox-primary" onChange={handleChangeFavoriteFilterValue} defaultChecked={filterFavorite} />
             <FaStar className="swap-on fill-current text-yellow-500" size={20} />
           </label>
         </div>
