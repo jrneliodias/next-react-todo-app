@@ -6,7 +6,7 @@ import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import { deleteTodo, editTodo } from '@/app/apis/api'
 import { FaRegStar, FaStar } from 'react-icons/fa'
-import ColorPicker from './colorPicker'
+import ColorPicker from './ColorPicker'
 
 
 interface TaskProps {
