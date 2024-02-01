@@ -1,25 +1,16 @@
 'use client'
 import React, { ChangeEvent, FormEventHandler, useState } from 'react'
-import { ITask, ITaskColor } from '../../../types/tasks'
+import { ITaskColor } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import { deleteTodo, editTodo } from '@/app/apis/api'
 import { FaRegStar, FaStar } from 'react-icons/fa'
 
-import type { ColorPickerProps, GetProp } from 'antd';
 
-
-type Color = GetProp<ColorPickerProps, 'value'>;
 interface TaskProps {
     task: ITaskColor
 }
-
-interface ColorOption {
-    value: string;
-    label: string;
-    backgroundColor: string;
-  }
 
 function Task({ task }: TaskProps) {
     const router = useRouter();
@@ -68,15 +59,17 @@ function Task({ task }: TaskProps) {
 
     const handleChangeColorValue = async (colorValue: string) => {
         const newColor = colorValue
-        setSelectedColor(newColor);
-
-        await editTodo({
-            id: task.id,
-            favorite: isFavorite,
-            content: taskToEdit,
-            color: newColor
-        })
-        router.refresh()
+        if (newColor !== task.color){
+            setSelectedColor(newColor);
+            
+            await editTodo({
+                id: task.id,
+                favorite: isFavorite,
+                content: taskToEdit,
+                color: newColor
+            })
+            router.refresh()
+        }
     }
 
 
@@ -96,10 +89,7 @@ function Task({ task }: TaskProps) {
                 </label>
             </td>
             <td className=''>
-                {/* <ColorPicker value={color}
-                    size="small"
-                    onChangeComplete={(value) => handleChangeColorValue(value.toHex())} /> */}
-
+              
                 <div className="dropdown dropdown-top">
                     <div tabIndex={0} role="button" className="btn m-1 btn-sm">
                         <div className={` ${selectedColor} w-4 h-4 `}></div>
