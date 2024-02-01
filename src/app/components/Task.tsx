@@ -6,13 +6,14 @@ import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import { deleteTodo, editTodo } from '@/app/apis/api'
 import { FaRegStar, FaStar } from 'react-icons/fa'
+import ColorPicker from './colorPicker'
 
 
 interface TaskProps {
     task: ITaskColor
 }
 
-function Task({ task }: TaskProps) {
+export default function Task({ task }: TaskProps) {
     const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
@@ -59,9 +60,9 @@ function Task({ task }: TaskProps) {
 
     const handleChangeColorValue = async (colorValue: string) => {
         const newColor = colorValue
-        if (newColor !== task.color){
+        if (newColor !== task.color) {
             setSelectedColor(newColor);
-            
+
             await editTodo({
                 id: task.id,
                 favorite: isFavorite,
@@ -89,21 +90,7 @@ function Task({ task }: TaskProps) {
                 </label>
             </td>
             <td className=''>
-              
-                <div className="dropdown dropdown-top">
-                    <div tabIndex={0} role="button" className="btn m-1 btn-sm">
-                        <div className={` ${selectedColor} w-4 h-4 `}></div>
-                    </div>
-                    <div tabIndex={0} className="dropdown-content z-[1] menu menu-horizontal  p-3 shadow bg-base-100 rounded-box w-28 gap-2">
-                        <input type="radio" name='radio-color' value={'bg-blue-400'} className="radio btn-xs btn-square btn-active bg-blue-400 checked:bg-blue-500" 
-                        onChange={e=>handleChangeColorValue(e.target.value)}/>
-                        <input type="radio" name='radio-color' value={'bg-green-400'}  className="radio btn-xs btn-square btn-active bg-green-400 checked:bg-green-500" 
-                        onChange={e=>handleChangeColorValue(e.target.value)}/>
-                        <input type="radio" name='radio-color' value={'bg-red-400'} className="radio btn-xs btn-square bg-red-400  checked:bg-red-500"  
-                        onChange={e=>handleChangeColorValue(e.target.value)}/>
-                    </div>
-                     
-                </div>
+                <ColorPicker task={task} isFavorite={isFavorite} taskToEdit={taskToEdit} />
             </td>
             <td className='w-full'>{task.content}</td>
 
@@ -137,4 +124,3 @@ function Task({ task }: TaskProps) {
     )
 }
 
-export default Task
