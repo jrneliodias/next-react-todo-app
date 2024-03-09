@@ -1,14 +1,14 @@
 import { ITask, ITaskColor, TaskObject } from "../../../types/tasks";
 
-const baseUrl = "http://localhost:3000/apis";
+const baseUrl = "https://todo-list-app-nelio-jwpj6z5yf-jrneliodias-projects.vercel.app/apis";
 
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`${baseUrl}/task`,{cache:'no-store'});
+  const res = await fetch(`${baseUrl}/task`, { cache: "no-store" });
   const todos = await res.json();
   return todos;
 };
 
-export const addTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
+export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
   const res = await fetch(`${baseUrl}/task`, {
     method: "POST",
     headers: {
@@ -20,7 +20,7 @@ export const addTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
   return newTodo;
 };
 
-export const editTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
+export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
   const res = await fetch(`${baseUrl}/task`, {
     method: "PUT",
     headers: {
@@ -32,13 +32,12 @@ export const editTodo = async (todo: ITaskColor):Promise<ITaskColor> => {
   return updateTodo;
 };
 
-export const deleteTodo = async (id: string):Promise<void> => {
+export const deleteTodo = async (id: string): Promise<void> => {
   await fetch(`${baseUrl}/task`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({id}),
+    body: JSON.stringify({ id }),
   });
 };
-
