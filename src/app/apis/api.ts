@@ -47,30 +47,3 @@ export async function getAllTasks() {
   const tasks = await prisma.task.findMany();
   return tasks;
 }
-
-export async function addTask(task: ITaskColor) {
-  const newTask = await prisma.task.create({
-    data: {
-      id: task.id,
-      content: task.content,
-      color: task.color,
-      favorite: task.favorite,
-    },
-  });
-  return newTask;
-}
-
-export async function editTask(task: ITaskColor) {
-  const newTask = await prisma.task.update({
-    where: {
-      id: task.id,
-    },
-
-    data: {
-      content: task.content,
-      color: task.color,
-      favorite: task.favorite,
-    },
-  });
-  return newTask;
-}
