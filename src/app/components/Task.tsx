@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, FormEventHandler, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, KeyboardEventHandler, useState } from 'react'
 import { ITaskColor } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
@@ -16,10 +16,10 @@ interface TaskProps {
 export default function Task({ task }: TaskProps) {
     const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
+    const [editing, setEditing] = useState<boolean>(false);
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
     const [isFavorite, setFavorite] = useState<boolean>(task.favorite);
     const [taskToEdit, setTaskToEdit] = useState<string>(task.content);
-
 
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -36,6 +36,24 @@ export default function Task({ task }: TaskProps) {
 
 
     }
+
+    const handleEditTodo: React.KeyboardEventHandler<HTMLInputElement> = async (event) => {
+
+        if (event.key === 'Enter') {
+            setEditing(false)
+            await editTodo({
+                id: task.id,
+                favorite: false,
+                content: taskToEdit,
+                color: task.color
+            })
+
+            router.refresh()
+
+        }
+
+    }
+
 
     const handleSubmitDeleteTask = async (id: string) => {
         await deleteTodo(id);
@@ -77,24 +95,17 @@ export default function Task({ task }: TaskProps) {
             <td className=''>
                 <ColorPicker task={task} isFavorite={isFavorite} taskToEdit={taskToEdit} />
             </td>
-            <td className='w-full'>{task.content}</td>
 
-            <td className='flex gap-5'>
-                <FiEdit
-                    onClick={() => setOpenModalEdit(true)}
-                    cursor='pointer' size={20} />
-                <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
-                    <form onSubmit={handleSubmitEditTodo}>
-                        <h3 className="font-bold text-lg">Edit the task</h3>
-                        <div className="modal-action">
-                            <input type="text" placeholder="Type here"
-                                value={taskToEdit}
-                                onChange={e => setTaskToEdit(e.target.value)}
-                                className="input input-bordered w-full " />
-                            <button type='submit' className='btn'>Submit</button>
-                        </div>
-                    </form>
-                </Modal>
+            <td className='w-full'>
+                <button onClick={() => setEditing(true)} className={` ${editing ? 'hidden' : ''}`}>{task.content}</button>
+                <input type="text" placeholder="Type here"
+                    value={taskToEdit}
+                    onKeyDown={handleEditTodo}
+                    onChange={e => setTaskToEdit(e.target.value)}
+                    className={`input  input-ghost p-1 w-full ${editing ? '' : 'hidden'}`} />
+            </td>
+
+            <td className=''>
                 <FiTrash onClick={() => setDeleteModal(true)} cursor='pointer' size={20} className='text-red-500' />
                 <Modal modalOpen={openDeleteModal} setModalOpen={setDeleteModal}>
                     <form onSubmit={handleSubmitEditTodo}>
