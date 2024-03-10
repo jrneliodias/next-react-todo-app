@@ -4,7 +4,7 @@ import prisma from "../../../lib/db";
 const baseUrl = "https://todo-list-app-nelio-jwpj6z5yf-jrneliodias-projects.vercel.app/apis";
 
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`/task`, { cache: "no-store" });
+  const res = await fetch(`/apis/task`, { cache: "no-store" });
   const todos = await res.json();
   return todos;
 };

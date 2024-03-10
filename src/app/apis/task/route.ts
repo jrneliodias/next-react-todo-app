@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/db";
 
-export async function GET(req:NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     const task = await prisma.task.findMany();
 
-    return Response.json({task });
+    return Response.json({ task });
   } catch (error) {
     return NextResponse.json(
       {
@@ -18,7 +18,7 @@ export async function GET(req:NextRequest) {
 }
 
 export async function POST(req: Request) {
-  const {id, content, favorite, color } = await req.json();
+  const { id, content, favorite, color } = await req.json();
 
   try {
     const task = await prisma.task.create({
@@ -74,7 +74,7 @@ export async function PUT(req: NextRequest) {
         color,
       },
     });
-    return NextResponse.json({message:"OK",task})
+    return NextResponse.json({ message: "OK", task });
   } catch (error) {
     return NextResponse.json(
       {
