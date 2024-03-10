@@ -22,7 +22,7 @@ export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`/task`, {
+  const res = await fetch(`${baseUrl}/task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
