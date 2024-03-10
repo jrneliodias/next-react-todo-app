@@ -30,12 +30,11 @@ export default function AddTask() {
   }
 
 
-
   return (
-    <div className='flex'>
+    <div className='flex mx-5 justify-end'>
       <button
         onClick={() => setModalOpen(true)}
-        className='btn btn-primary w-1/2 max-w-xl text-md py-2 mx-auto'>
+        className='btn btn-primary sm:w-1/3 md:w-1/4 text-md py-2 '>
         <span >
           ADD NEW TASK
         </span>
@@ -43,7 +42,7 @@ export default function AddTask() {
       </button>
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
         <form onSubmit={handleSubmitNewTodo}>
-          <h3 className="font-bold text-lg">Add new task</h3>
+          <h3 className="font-bold text-xl">Add new task</h3>
           <div className="modal-action">
             <label className="swap swap-flip my-auto">
               {/* this hidden checkbox controls the state */}
