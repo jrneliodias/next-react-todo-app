@@ -1,9 +1,10 @@
 import { ITask, ITaskColor, TaskObject } from "../../../types/tasks";
+import prisma from "../../../lib/db";
 
 const baseUrl = "https://todo-list-app-nelio-jwpj6z5yf-jrneliodias-projects.vercel.app/apis";
 
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`${baseUrl}/task`, { cache: "no-store" });
+  const res = await fetch(`/task`, { cache: "no-store" });
   const todos = await res.json();
   return todos;
 };
@@ -21,7 +22,7 @@ export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`${baseUrl}/task`, {
+  const res = await fetch(`/task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -41,3 +42,35 @@ export const deleteTodo = async (id: string): Promise<void> => {
     body: JSON.stringify({ id }),
   });
 };
+
+export async function getAllTasks() {
+  const tasks = await prisma.task.findMany();
+  return tasks;
+}
+
+export async function addTask(task: ITaskColor) {
+  const newTask = await prisma.task.create({
+    data: {
+      id: task.id,
+      content: task.content,
+      color: task.color,
+      favorite: task.favorite,
+    },
+  });
+  return newTask;
+}
+
+export async function editTask(task: ITaskColor) {
+  const newTask = await prisma.task.update({
+    where: {
+      id: task.id,
+    },
+
+    data: {
+      content: task.content,
+      color: task.color,
+      favorite: task.favorite,
+    },
+  });
+  return newTask;
+}

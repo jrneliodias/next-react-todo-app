@@ -1,13 +1,9 @@
-import { getAllTodos } from "@/app/apis/api";
+import { getAllTasks } from "@/app/apis/api";
 import AddTask from "./components/AddTask";
 import TodoList from "./components/TodoList";
-import prisma from '../../lib/db'
 
-async function getAllTasks() {
-  const tasks = await prisma.task.findMany()
-  return tasks
 
-}
+
 
 export default async function Home() {
   const tasks = await getAllTasks();
