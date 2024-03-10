@@ -10,7 +10,7 @@ export const getAllTodos = async (): Promise<TaskObject> => {
 };
 
 export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`/apis/add-task`, {
+  const res = await fetch(`${baseUrl}/apis/add-task`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
