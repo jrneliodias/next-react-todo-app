@@ -1,10 +1,10 @@
 import { ITask, ITaskColor, TaskObject } from "../../../types/tasks";
 import prisma from "../../../lib/db";
 
-const baseUrl = "https://todo-list-app-nelio-jwpj6z5yf-jrneliodias-projects.vercel.app/apis";
+const baseUrl = "https://todo-list-app-nelio.vercel.app";
 
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`/apis/task`, { method: "GET", cache: "no-store" });
+  const res = await fetch(`${baseUrl}/apis/task`, { method: "GET", cache: "no-store" });
   const todos = await res.json();
   return todos;
 };
