@@ -22,7 +22,7 @@ export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`${baseUrl}/task`, {
+  const res = await fetch(`${baseUrl}/apis/task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const deleteTodo = async (id: string): Promise<void> => {
-  await fetch(`${baseUrl}/task`, {
+  await fetch(`${baseUrl}/apis/task`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
