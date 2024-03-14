@@ -43,7 +43,7 @@ export default function Task({ task }: TaskProps) {
             setEditing(false)
             await editTodo({
                 id: task.id,
-                favorite: false,
+                favorite: task.favorite,
                 content: taskToEdit,
                 color: task.color
             })
