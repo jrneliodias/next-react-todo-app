@@ -9,6 +9,8 @@ export default async function Home() {
   const tasks = await getAllTodos();
 
 
+
+
   return (
     <main className="max-w-4xl my-5 mx-auto">
       <div className="flex w-full flex-col gap-3 justify-center">

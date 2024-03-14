@@ -1,7 +1,8 @@
-import { ITask, ITaskColor, TaskObject } from "../../../types/tasks";
+import { ITaskColor, TaskObject } from "../../../types/tasks";
 import prisma from "../../../lib/db";
 
-const baseUrl = "https://todo-list-app-nelio.vercel.app";
+// const baseUrl = "https://todo-list-app-nelio.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_MY_APP_LOCAL || process.env.NEXT_PUBLIC_MY_APP_URL;
 
 export const getAllTodos = async (): Promise<TaskObject> => {
   const res = await fetch(`${baseUrl}/apis/task`, { method: "GET", cache: "no-store" });
