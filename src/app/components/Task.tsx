@@ -132,20 +132,28 @@ export default function Task({ task }: TaskProps) {
                 <label className="swap swap-flip">
                     <input type="checkbox"
                         onChange={handleChangeFavoriteValue}
-                        defaultChecked={isFavorite} />
+                        defaultChecked={isFavorite}
+                        disabled={isChecked} />
 
                     <FaRegStar className="swap-off fill-current" size={20} />
                     <FaStar className="swap-on fill-current text-yellow-500" size={20} />
                 </label>
             </td>
             <td className=''>
-                <ColorPicker task={task} isFavorite={isFavorite} taskToEdit={taskToEdit} />
+                <ColorPicker
+                    task={task}
+                    isFavorite={isFavorite}
+                    taskToEdit={taskToEdit}
+                    isCompleted={isChecked}
+                />
             </td>
 
             <td className='w-full'>
                 <button
                     onClick={() => setEditingTask(true)}
-                    className={` ${editingTask ? 'hidden' : ''}`}>
+                    className={` ${editingTask ? 'hidden' : ''}  ${isChecked ? 'line-through text-gray-500/50' : ''}`}
+                    disabled={isChecked}
+                >
                     {task.content}
                 </button>
                 <input
