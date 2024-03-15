@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "json-server": "json-server --watch data/todos.json --port 3001",
-    "prepare": "prisma generate"
+    "prepare": "prisma generate",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "next": "14.1.0",
@@ -19,6 +21,8 @@
   },
   "devDependencies": {
     "@prisma/client": "^5.10.2",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -27,6 +31,8 @@
     "daisyui": "^4.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "json-server": "^1.0.0-alpha.22",
     "postcss": "^8",
     "prisma": "^5.10.2",
