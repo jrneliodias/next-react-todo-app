@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, FormEventHandler, KeyboardEventHandler, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, KeyboardEventHandler, useEffect, useRef, useState } from 'react'
 import { ITaskColor } from '../../../types/tasks'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import Modal from './Modal'
@@ -16,11 +16,26 @@ interface TaskProps {
 export default function Task({ task }: TaskProps) {
     const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
-    const [editing, setEditing] = useState<boolean>(false);
+    const [editingTask, setEditingTask] = useState<boolean>(false);
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
     const [isFavorite, setFavorite] = useState<boolean>(task.favorite);
     const [taskToEdit, setTaskToEdit] = useState<string>(task.content);
     const [isChecked, setChecked] = useState<boolean>(task.completed);
+
+    let editRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        let mouseClickOutsideHandler = (event: MouseEvent) => {
+            if (!editRef.current!.contains(event.target as Node)) {
+                setEditingTask(false)
+            }
+        }
+        document.addEventListener("mousedown", mouseClickOutsideHandler)
+
+        return () => {
+            document.removeEventListener('mousedown', mouseClickOutsideHandler)
+        }
+    })
 
 
 
@@ -43,7 +58,7 @@ export default function Task({ task }: TaskProps) {
     const handleEditTodo: React.KeyboardEventHandler<HTMLInputElement> = async (event) => {
 
         if (event.key === 'Enter') {
-            setEditing(false)
+            setEditingTask(false)
             await editTodo({
                 id: task.id,
                 favorite: task.favorite,
@@ -115,7 +130,6 @@ export default function Task({ task }: TaskProps) {
             <td>
 
                 <label className="swap swap-flip">
-                    {/* this hidden checkbox controls the state */}
                     <input type="checkbox"
                         onChange={handleChangeFavoriteValue}
                         defaultChecked={isFavorite} />
@@ -129,12 +143,20 @@ export default function Task({ task }: TaskProps) {
             </td>
 
             <td className='w-full'>
-                <button onClick={() => setEditing(true)} className={` ${editing ? 'hidden' : ''}`}>{task.content}</button>
-                <input type="text" placeholder="Type here"
+                <button
+                    onClick={() => setEditingTask(true)}
+                    className={` ${editingTask ? 'hidden' : ''}`}>
+                    {task.content}
+                </button>
+                <input
+                    ref={editRef}
+                    type="text"
+                    placeholder="Type here"
                     value={taskToEdit}
                     onKeyDown={handleEditTodo}
                     onChange={e => setTaskToEdit(e.target.value)}
-                    className={`input  input-ghost p-1 w-full ${editing ? '' : 'hidden'}`} />
+                    className={`input  input-ghost p-1 w-full ${editingTask ? '' : 'hidden'}`}
+                />
             </td>
 
             <td className=''>
