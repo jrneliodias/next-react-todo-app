@@ -11,8 +11,9 @@ datasource db {
 }
 
 model task {
-  id       String  @id @default(uuid())
-  content  String  @db.VarChar(200)
-  favorite Boolean @default(false)
-  color    String  @default("#0000") @db.VarChar(15)
+  id        String  @id @default(uuid())
+  content   String  @db.VarChar(200)
+  favorite  Boolean @default(false)
+  completed Boolean @default(false)
+  color     String  @default("#0000") @db.VarChar(15)
 }
