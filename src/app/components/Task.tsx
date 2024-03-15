@@ -20,6 +20,8 @@ export default function Task({ task }: TaskProps) {
     const [openDeleteModal, setDeleteModal] = useState<boolean>(false);
     const [isFavorite, setFavorite] = useState<boolean>(task.favorite);
     const [taskToEdit, setTaskToEdit] = useState<string>(task.content);
+    const [isChecked, setChecked] = useState<boolean>(task.completed);
+
 
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -28,7 +30,8 @@ export default function Task({ task }: TaskProps) {
             id: task.id,
             favorite: false,
             content: taskToEdit,
-            color: task.color
+            color: task.color,
+            completed: task.completed
         })
 
         setOpenModalEdit(false);
@@ -45,7 +48,8 @@ export default function Task({ task }: TaskProps) {
                 id: task.id,
                 favorite: task.favorite,
                 content: taskToEdit,
-                color: task.color
+                color: task.color,
+                completed: task.completed
             })
 
             router.refresh()
@@ -70,9 +74,27 @@ export default function Task({ task }: TaskProps) {
             id: task.id,
             favorite: favoriteChange,
             content: taskToEdit,
-            color: task.color
+            color: task.color,
+            completed: task.completed
         })
         router.refresh()
+    }
+    const handleChangeCheckboxValue = async (e: ChangeEvent<HTMLInputElement>) => {
+
+        const checkboxValue = e.target.checked
+
+        setChecked(checkboxValue)
+
+        await editTodo({
+            id: task.id,
+            favorite: task.favorite,
+            content: taskToEdit,
+            color: task.color,
+            completed: checkboxValue
+        })
+        router.refresh()
+
+
     }
 
 
@@ -80,6 +102,16 @@ export default function Task({ task }: TaskProps) {
     return (
 
         <tr key={task.id} className={`hover`}>
+            <td>
+                <label className="label cursor-pointer ">
+                    <input
+                        type="checkbox"
+                        className="checkbox checkbox-primary"
+                        checked={isChecked}
+                        onChange={(event) => handleChangeCheckboxValue(event)} />
+                    <div className={`rounded-md`}></div>
+                </label>
+            </td>
             <td>
 
                 <label className="swap swap-flip">

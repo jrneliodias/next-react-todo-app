@@ -14,13 +14,15 @@ export default function AddTask() {
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [isFavorite, setFavorite] = useState<boolean>(false);
 
+
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     await addTodo({
       id: uuidv4(),
       favorite: isFavorite,
       content: newTaskValue,
-      color: selectedColor
+      color: selectedColor,
+      completed: false
     })
     setNewTaskValue("");
     setModalOpen(false);

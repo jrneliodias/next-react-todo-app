@@ -62,7 +62,7 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { id, content, favorite, color } = await req.json();
+  const { id, content, favorite, color, completed } = await req.json();
   try {
     const task = await prisma.task.update({
       where: {
@@ -72,6 +72,7 @@ export async function PUT(req: NextRequest) {
         content,
         favorite,
         color,
+        completed,
       },
     });
     return NextResponse.json({ message: "OK", task });

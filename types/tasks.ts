@@ -1,13 +1,13 @@
 export interface ITask {
-    id: string,
-    content: string,
-    favorite:boolean,
-  
+  id: string;
+  content: string;
+  favorite: boolean;
+  completed: boolean;
 }
 export interface TaskObject {
-    task:ITaskColor[]
+  task: ITaskColor[];
 }
 
 export interface ITaskColor extends ITask {
-    color: string
+  color: string;
 }
