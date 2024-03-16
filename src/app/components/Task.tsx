@@ -74,10 +74,14 @@ export default function Task({ task }: TaskProps) {
     }
 
 
-    const handleSubmitDeleteTask = async (id: string) => {
-        await deleteTodo(id);
-        setDeleteModal(false)
+    const handleSubmitDeleteTask: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        await deleteTodo(task.id);
+
+        setDeleteModal(false);
         router.refresh()
+
+
     }
 
 
@@ -170,10 +174,10 @@ export default function Task({ task }: TaskProps) {
             <td className=''>
                 <FiTrash onClick={() => setDeleteModal(true)} cursor='pointer' size={20} className='text-red-500' />
                 <Modal modalOpen={openDeleteModal} setModalOpen={setDeleteModal}>
-                    <form onSubmit={handleSubmitEditTodo}>
+                    <form onSubmit={handleSubmitDeleteTask}>
                         <h3 className="font-bold text-lg">Are you sure to delete?</h3>
                         <div className="modal-action">
-                            <button onClick={() => handleSubmitDeleteTask(task.id)} type='submit' className='btn'>Delete</button>
+                            <button type='submit' className='btn'>Delete</button>
                         </div>
                     </form>
                 </Modal>
