@@ -47,3 +47,8 @@ export const deleteTodo = async (id: string): Promise<void> => {
     body: JSON.stringify({ id }),
   });
 };
+
+export async function getAllTasks() {
+  const tasks = await prisma.task.findMany();
+  return tasks;
+}

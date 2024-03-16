@@ -1,4 +1,4 @@
-import { getAllTodos } from "@/app/apis/api";
+import { getAllTasks } from "@/app/apis/api";
 import AddTask from "./components/AddTask";
 import TodoList from "./components/TodoList";
 
@@ -6,7 +6,7 @@ import TodoList from "./components/TodoList";
 
 
 export default async function Home() {
-  const tasks = await getAllTodos();
+  const tasks = await getAllTasks();
 
 
 
@@ -16,7 +16,7 @@ export default async function Home() {
       <div className="flex w-full flex-col gap-3 justify-center">
         <h1 className="text-center text-4xl justify-center font-bold">TO DO LIST</h1>
         <AddTask />
-        <TodoList tasks={tasks.task} />
+        <TodoList tasks={tasks} />
       </div>
 
     </main>
