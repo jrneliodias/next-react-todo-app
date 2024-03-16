@@ -22,7 +22,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.23.3",
     "@faker-js/faker": "^8.4.1",
     "@prisma/client": "^5.10.2",
     "@testing-library/jest-dom": "^6.4.2",
