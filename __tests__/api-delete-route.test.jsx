@@ -17,10 +17,18 @@ mockCreate.mockResolvedValue(testValues);
 
 describe("POST", () => {
   it("should return 200 when delete a task", async () => {
-    // Call the POST function with the mock request object
     const response = await DELETE(mockReq);
     const tasks = await response.json();
 
     expect(response.status).toBe(200);
+  });
+
+  it("should return 500 when delete fail", async () => {
+    mockCreate.mockRejectedValue(new Error("Failed to delete task"));
+
+    const response = await DELETE(mockReq);
+    const tasks = await response.json();
+
+    expect(response.status).toBe(500);
   });
 });
