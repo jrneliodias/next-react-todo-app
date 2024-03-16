@@ -39,22 +39,6 @@ export default function Task({ task }: TaskProps) {
 
 
 
-    const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
-        await editTodo({
-            id: task.id,
-            favorite: false,
-            content: taskToEdit,
-            color: task.color,
-            completed: task.completed
-        })
-
-        setOpenModalEdit(false);
-        router.refresh()
-
-
-    }
-
     const handleEditTodo: React.KeyboardEventHandler<HTMLInputElement> = async (event) => {
 
         if (event.key === 'Enter') {
