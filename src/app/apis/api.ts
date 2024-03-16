@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`${baseUrl}/apis/task`, { method: "GET", cache: "no-store" });
+  const res = await fetch(`${baseUrl}/apis/get-task`, { method: "GET", cache: "no-store" });
   const todos = await res.json();
   return todos;
 };
@@ -27,7 +27,7 @@ export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`${baseUrl}/apis/task`, {
+  const res = await fetch(`${baseUrl}/apis/update-task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const deleteTodo = async (id: string): Promise<void> => {
-  await fetch(`${baseUrl}/apis/task`, {
+  await fetch(`${baseUrl}/apis/delete-task`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -47,8 +47,3 @@ export const deleteTodo = async (id: string): Promise<void> => {
     body: JSON.stringify({ id }),
   });
 };
-
-export async function getAllTasks() {
-  const tasks = await prisma.task.findMany();
-  return tasks;
-}
