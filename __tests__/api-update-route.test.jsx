@@ -19,7 +19,7 @@ const mockCreate = jest.spyOn(prisma.task, "update");
 mockCreate.mockResolvedValue(testValues);
 
 describe("PUT Route Test", () => {
-  it("should create a new task", async () => {
+  it("should update a task", async () => {
     // Call the PUT function with the mock request object
     const response = await PUT(mockReq);
     const tasks = await response.json();
@@ -31,5 +31,20 @@ describe("PUT Route Test", () => {
 
     // Check if the response task matches the expected data
     expect(tasks.task).toEqual(testValues);
+  });
+
+  it("should return an error message when task update fails", async () => {
+    // Mocking the Prisma task create method to throw an error
+    mockCreate.mockRejectedValue(new Error("Failed to create task"));
+
+    // Call the PUT function with the mock request object
+    const response = await PUT(mockReq);
+    const tasks = await response.json();
+
+    // Check if the error message is returned
+    expect(tasks.message).toBe("Error");
+
+    // Check if the error status is returned
+    expect(response.status).toBe(500);
   });
 });
