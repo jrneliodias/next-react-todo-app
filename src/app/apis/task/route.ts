@@ -18,7 +18,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { id, content, favorite, color } = await req.json();
+  const { id, content, favorite, color, completed } = await req.json();
 
   try {
     const task = await prisma.task.create({
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         content,
         favorite,
         color,
+        completed,
       },
     });
     return Response.json({ message: "OK", task });
