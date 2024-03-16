@@ -8,8 +8,18 @@ if (process.env.NODE_ENV === "development") {
   baseUrl = process.env.NEXT_PUBLIC_MY_APP_LOCAL;
 }
 
+import { ITaskColor, TaskObject } from "../../../types/tasks";
+import prisma from "../../../lib/db";
+
+let baseUrl = process.env.NEXT_PUBLIC_MY_APP_URL;
+
+if (process.env.NODE_ENV === "development") {
+  // Code to execute when running in a development environment
+  baseUrl = process.env.NEXT_PUBLIC_MY_APP_LOCAL;
+}
+
 export const getAllTodos = async (): Promise<TaskObject> => {
-  const res = await fetch(`${baseUrl}/apis/get-task`, { method: "GET", cache: "no-store" });
+  const res = await fetch(`${baseUrl}/apis/task`, { method: "GET", cache: "no-store" });
   const todos = await res.json();
   return todos;
 };
@@ -27,7 +37,7 @@ export const addTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
-  const res = await fetch(`${baseUrl}/apis/update-task`, {
+  const res = await fetch(`${baseUrl}/apis/task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +49,7 @@ export const editTodo = async (todo: ITaskColor): Promise<ITaskColor> => {
 };
 
 export const deleteTodo = async (id: string): Promise<void> => {
-  await fetch(`${baseUrl}/apis/delete-task`, {
+  await fetch(`${baseUrl}/apis/task`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
