@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom";
 import { POST } from "../src/app/apis/task/route.ts";
-import { NextRequest, NextResponse } from "next/server";
 import { faker } from "@faker-js/faker";
 
 const testValues = {

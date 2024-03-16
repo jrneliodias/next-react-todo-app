@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom";
 import { DELETE } from "../src/app/apis/task/route.ts";
-import { NextRequest, NextResponse } from "next/server";
 import { faker } from "@faker-js/faker";
 
 const testValues = {
@@ -15,7 +14,7 @@ const mockReq = {
 const mockCreate = jest.spyOn(prisma.task, "delete");
 mockCreate.mockResolvedValue(testValues);
 
-describe("POST", () => {
+describe("DELETE route test", () => {
   it("should return 200 when delete a task", async () => {
     const response = await DELETE(mockReq);
     const tasks = await response.json();
