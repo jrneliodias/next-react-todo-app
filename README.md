@@ -1,6 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TO DO APP
 
-## Getting Started
+## Resumo
+
+To Do App, é um projeto clássico que visa criar experiência no front end com interfaces em React e backend com desenvolvimento de API com arquitetura REST para criar um CRUD, banco de dados hospedado na Vercel e aplicação de testes unitários com Jest. 
+
+
+#️# Tecnonologias do projeto
+
+- Next Js
+
+- Node Js
+
+- Typescript
+
+- Banco de dados Postgres da Vercel
+
+- Prisma ORM
+
+- Testes com Jest
+
+## Funcionalidades
+
+- O usuário pode criar, editar, apagar, escolher uma cor para a tarefa, marcar como feito e marcar como favorito qualquer tarefa.
+
+
+
+- Todas as tarefas favoritas são movidas para o topo da lista.
+
+- A interface tem filtos para as cores e por tarefa favorita. Sendo que pode escolher múltiplos filtros.
+
+#️# Back-End 
+
+- No banco de dados foi criado uma tabela Task com os campos
+``` SQL
+"id" UUID NOT NULL,
+
+"content" VARCHAR(200) NOT NULL,
+
+"favorite" BOOLEAN NOT NULL DEFAULT false,
+
+"color" VARCHAR(10) NOT NULL,
+
+"completed" BOOLEAN NOT NULL DEFAULT false
+```
+
+- Toda edição em uma tarefa pelo usuário é salva no banco de dados via API.
+
+- A API foi testada com Jest e encontra-se no repositório. Coloquei na imagem abaixo os resultados.
+
+
+
+Hospedagem: https://todo-list-app-nelio.vercel.app/  
+
+Estou aberto para feedbacks e ansioso para discutir mais detalhes sobre o projeto!
+## Testes com Jest
+
+![Captura de tela 2024-03-16 153048](https://github.com/jrneliodias/corel-lab-todo-app-nelio/assets/69831915/42161683-0352-488a-a8da-f11f9822dc99)
+
+## Como iniciar
 
 First, run the development server:
 
@@ -14,23 +71,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
