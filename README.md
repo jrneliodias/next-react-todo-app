@@ -5,18 +5,14 @@
 To Do App, é um projeto clássico que visa criar experiência no front end com interfaces em React e backend com desenvolvimento de API com arquitetura REST para criar um CRUD, banco de dados hospedado na Vercel e aplicação de testes unitários com Jest. 
 
 
-#️# Tecnonologias do projeto
+## Tecnologias do projeto
 
 - Next Js
-
 - Node Js
-
+- Daisy Ui
 - Typescript
-
 - Banco de dados Postgres da Vercel
-
 - Prisma ORM
-
 - Testes com Jest
 
 ## Funcionalidades
@@ -29,7 +25,7 @@ To Do App, é um projeto clássico que visa criar experiência no front end com 
 
 - A interface tem filtos para as cores e por tarefa favorita. Sendo que pode escolher múltiplos filtros.
 
-#️# Back-End 
+## Back-End 
 
 - No banco de dados foi criado uma tabela Task com os campos
 ``` SQL
